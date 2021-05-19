@@ -1,0 +1,1542 @@
+Ques:1-> difference between promises and observable.
+Ans: 	
+Promises : Emit a single value at a time and they are not lazy i.e can execute after creation. Promises are not cancellable
+
+Observable: Emits values over a period of time 2. Lazy - : we have to subscribe to get the data. they are cancellable using unsubscribe method.
+
+Ques:2-> difference between = = and = = = operator.
+Ans: = = = operator allows type conversion(strict type checking value + type) and = = operator doesnot allow thats.
+eg. 12=="12" is true with == as "12" will be converted to 12
+	12==="12" is false as === operator checks equality and type.it strictly checks both operands.
+	1==true is true whereas 1===true is false
+	
+
+Ques:3-> lexical scope
+Ans: JavaScript has lexical scoping with function scope. In other words, even though JavaScript looks like it should have block scope because it uses curly braces { }, a new scope is created only when you create a new function.
+
+function a()
+{
+var x=5;
+
+function innerfun()
+{
+console.log(x);
+}
+return innerfun;
+}
+
+var exe=a()
+exe()
+
+o/p : 5 
+
+
+Ques:4-> javascript closure
+Ans:  A closure is a special kind of object that combines two things: a function, and the environment in which that function was created. The environment consists of any local variables that were in-scope at the time that the closure was created.
+
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).In other words, a closure gives you access to an outer function’s scope from an inner function.This environment consists of any local variables that were in-scope at the time the closure was created.
+
+Note : https://blog.bitsrc.io/a-beginners-guide-to-closures-in-javascript-97d372284dda#:~:text=Every%20time%20the%20JavaScript%20engine,that%20holds%20identifier%2Dvariable%20mapping.
+
+for more info on closure and lexical environment follow link above.
+
+ex:
+function add(x)
+{
+	return function add2(y)
+	{
+		return x+y;
+	}
+}
+
+now when we call x(4) it will return function add2 function with its lexical scope of x =4 ; 
+and when we call add2(4) it returns result as 8.
+
+a closure can remember and access variables and arguments of its outer function even after the function has finished.
+
+Ques:5-> difference between for in and for of
+Ans:
+for... in iterates over keys 
+
+for... of iterates over values of object
+
+var a=['val1','val2','val3','val4']
+for(val in a)
+o/p 
+0
+1
+2
+3
+
+for(val of a)
+
+val1
+val2
+val3
+val4
+
+Ques:6-> Hoisting in js?
+Ans:  if we have 
+getName()
+console.log(x)
+
+
+var x=10;
+function getName()
+{
+console.log("hey its from function ")
+}
+
+then we get output as hey its from function 
+undefined
+
+because in js var is hoisted tp thr top of the block during compilation and  initialized with undefined. javascript compiler before main execution begins scans the code and when it founds var it takes the variable and its indentifier and stores it into the lecxical envireonment. 
+
+console.log(a);
+var a=1
+it takes the declaration and intialize it with undefined.
+and when the engine reaches the lines where actual intialization is done it replaces the undefined to that value.
+the block of code is aware of variable .
+link for More : https://developer.mozilla.org/en-US/docs/Glossary/Hoisting
+
+Ques:7-> what does object.assign?
+Ans: object.assign can help to merge 2 obejcts source into target and used to copy objects.
+
+let source ={a:1,b:2,c:{d:0}}
+let target={f:8};
+
+let result=object.assign(source,target);
+
+this will merge target into source ,
+
+to copy 
+let vl=Object.assign({},{g:0})
+
+
+Ques:8-> Shallow copy and deep copy in js?
+Ans: shallow copy: in shallow copy the old and new object refers to the same object.due to this any prop changes it is reflected in both the object.
+
+shallow copy can be done by:
+... , object.assign
+
+using object .assign properties in the targer object are over ridden if they have own key.
+
+
+deep copy: deep copy makes a copy of all the members of the old object, allocates separate memory location for the new object and then assigns the copied members to the new object.
+
+deep copy can be done by : JSON.parse(JSON.stringify(employee));
+
+https://blog.francium.tech/deep-and-shallow-copy-in-javascript-16f36e4db74d
+
+
+Ques:9-> what will be output for 
+
+a) 1==true -> will return true   and 1=== true -> will return false
+b) 1+true-> 2     1+false -> 1
+c) 5<6<7 and 7>6>5 (5<6 -> will return true which is 1 and 1<7 true so true)
+
+
+Ques:10-> what is Babel ?
+Ans: Babel is a javascript compiler.to convert es6 js to es2015.
+
+to install babel
+						npm i babel
+on cli -> babel input_file_you_want_to_convert -o output_file_name
+
+
+Ques: why Array.from() AND ARRAY.FLAT() is used?
+Ans:Array.from() lets us create an array from array like objects(Objects with length property ) or iterable objects.(Map and Set)
+
+Array.from(array or iterable object, <map function on eeach element of array>)
+Array.from("String")// it will create array from characters ["s","t","r","i","n","g"];
+
+
+Ques:11-> difference between let and var?
+Ans: 
+var : it has global scope when declared outside the function var varibales are hoisted. they are assigned memory immediately and initialized undefined. var variables are hoisted and intialized with undefined.
+
+let: it has a local scope.they are assigned storage but not initialized.during compiling phase they are hoisted but not intialized value. if value is read they throw reference error
+
+Ques:12-> What is AOT?
+Ans: AOT stands for Ahead of time compilation which means your angular html and component Ts files will be compiled during the build process. AOT gives advantage of faster rendering by compiling the code at the build time , browser downloads pre compiled . it detects template errors earier. and as it compiles code earlier and convert them into bundles so it prevents from injection attack.
+
+
+Ques:13-> What is JIT?
+Ans: Just in Time compilation in this our code is compiled just before rendering. 
+
+
+Ques:14-> ivy compiler?
+Ans: IVY is a angular compiler.which is used to build app faster, smaller bundle sizes and better template type checking.
+
+
+Ques:15->
+console.log(1 +  "2" + "2"); o/p-> 122
+console.log(1 +  +"2" + "2"); -> 32  bcoz unary operator has higher precedence so +"2" will be converted into 2
+console.log(1 +  -"1" + "2"); -> 02
+console.log(+"1" +  "1" + "2"); ->112
+console.log( "A" - "B" + "2");Nan2
+console.log( "A" - "B" + 2); -> NaN
+console.log("1"-"2") returns -1
+
+
+Ques:16->how can you compare 2 strings?
+Ans: let 'a'=='a'
+     let 'b'=='b'
+
+a<b returns true
+
+2.referenceString.localeCompare(targetString)
+Negative when the referenceStr occurs before compareString
+Positive when the referenceStr occurs after compareString
+Returns 0 if they are equivalent
+
+ a.localeCompare(b) returns -1 coz : a comes before  b
+
+it returns 1 if operand1 should appear operand2
+
+0 if operand1 ==operand2
+
+Note: use backslash \ to indicate string will continue with new line.
+
+Ques:17-> what is shift and unshift  operator in array?
+Ans: let arr=[1,2,3,4,5];
+
+shift operator pops out element from the starting
+
+arr.shift() returns 1
+
+unshift operator add the element in the starting position.
+arr.unshift('a') -- returns array : 'a',2,3,4,5
+
+shift() pops element from starting.
+pop(): pops element from the last 
+push() : adds the element from the last.
+unshift(): adds the element in the beginning
+
+using spread operator we can add element in an array
+
+['elementr name to add',...sourcearray]
+
+
+Ques:18-> findIndex ArrayMethod?
+Ans: it returns the index of the first elementin the array.
+
+let arr=['angular','react','java','dot net'];
+
+arr.findIndex((ele)=>ele=='angular')
+
+Ques:19-> Set in javascript.
+Ans: set let you store unique values.
+	
+	const mySet=new Set()
+	
+	it generates new set.
+
+to add elements to set 
+
+mySet.add(1), mySet(2), mySet.add({name:'rohit'})
+
+to check element in the set 
+
+mySet.has(1)  -> returns boolean value -> true
+
+to delete element 
+
+mySet.delete(element)
+
+Ques:20-> Object.is method ?
+Ans: it determines whether two values are same values.
+
+Object.is(value1,value2)'
+
+Object.is(undefined,undefined) returns true as undefined==undefined
+
+Object.is("hey","Hey") returns false (as is method is case sensitive)
+
+Object.is(NaN,NaN) returns true but NaN==NaN retruns false.
+
+difference between Object.is and (== && ===) is 
+
+== and === operator treats -0==+0 as true and +0===-0 also aas true 
+
+but object.is treats Object.is(-0,+0) returns false
+
+
+Ques:21-> what is hasOwnProperyty?
+Ans: hasOwnProperty checks whether the property exist in the object or not. it returns boolean
+
+eg> var obj={name:'abc'};
+
+obj.hasOwnProperty('name') returns --true
+
+obj.hasOwnProperty('car') returns --false
+
+
+Ques:22-> for what purpose object.assign is used?
+Ans: 
+merging two objects && assigning two object(copying enumerable properties)
+cloning a object
+
+Ques:23-> what are promises and promise chaining in js ?
+
+Ques:24-> how to use find objects?
+Ans: we can use find method : 
+
+const inventory = [
+  {name: 'apples', quantity: 2},
+  {name: 'bananas', quantity: 0},
+  {name: 'cherries', quantity: 5}
+];
+
+inventory.find( ({ name }) => name === 'cherries' );
+
+
+Ques:25-> Destructing in javascript?
+Ans: Destructing allow us to unpack the values from the object or array.
+
+
+eg: let a=[65,67,1,2]
+
+[a,b]=a
+
+[a,,c]=a then a is 65 and c is 1
+
+console.log(a)->65
+console.log(b)->67
+
+const inventory = [
+  {name: 'apples', quantity: 2},
+  {name: 'bananas', quantity: 0},
+  {name: 'cherries', quantity: 5}
+];
+
+let {name}=inventory[0]
+
+here name="apples"
+
+Ques:26-> what is tree shaking?
+
+Ques:27-> '5'+5=55 and '5'-5=0 why ?
+Ans in string + is concatenation it concats left and right and in '5'-5 it convert '5' to number 5.
+
+Ques:28->
+ true + false -> 1
+12 / "6" ->  2
+"number" + 15 + 3-> number153
+15 + 3 + "number"->18number
+[1] > null-> true
+"foo" + + "bar" -> fooNaN
+'true' == true   -> false
+false == 'false' -> false
+null == '' -> false
+!!"false" == !!"true"
+[‘x’] == ‘x’
+[] + null + 1
+[1,2,3] == [1,2,3]
+{}+[]+{}+[1]
+!+[]+[]+![]
+new Date(0) - 0
+new Date(0) + 0
+
+typeof null -> object
+typeof undefined -> undefined
+
+Ques: what is strict mode in js?
+Ans:Use strict allows you to restricted variant of js. as we know js is loosely typed language it doesnot check .
+'use strict'
+
+
+Ques:29-> how can you get the keyCode in javascript
+window.addEventListener('keypress',(e)=>{
+const guess=String.fromCharCode(e.charCode)
+)
+
+fromCharCode returns string letter from char code
+
+Ques:30-> what is use of spread operator?
+Ans: spread operator helps to expand array or string
+
+a argument in the argument list can use spread syntax
+
+function myFunction(v, w, x, y, z) { }
+let args = [0, 1];
+myFunction(-1, ...args, 2, ...[3]);
+
+here ..[3] is a argument
+
+
+Ques:31-> map operator in array?
+Ans: map operator in array is used to create a new array from existing by calling out function on each elemenr pf array .
+
+const array1 = [1, 4, 9, 16];
+
+// pass a function to map
+const map1 = array1.map(x=> x* 2);
+
+
+Ques: every method in js?
+every() method traverse complete array and test whether all the elements pass the test and returns boolean values
+
+var a=[1,2,3,4,5]
+a.every(x=>x<10) returns true as all elements are less than 10 it does && with values
+ 
+some : it test whether atleast one element in an array passes the test defined.
+
+a.some(x=>x>3) returns true
+a.every(x=>x>3) returns false
+
+
+Ques: can we use arrow function as object method ?
+Ans: NO! becuase arrow function could not bind itself to this,arguments.
+
+what will be expected o/p-
+
+const obj={
+name:'rohit',
+getName:()=>{
+
+return this.name}
+}
+
+obj.getName -> it returns "" as in arrow function it cannot find this so we have to use 
+
+getName:function() syntax
+
+Ques: what will be the expected output?
+Ans:
+!undefined  -> true 
+!NaN -> true 
+
+in js undefined , "", NaN, null  0 are bydefault are considered false
+
+
+Ques:use of rest operator?
+Ans : rest operator is denoted by ... it takes up the arguments and converts them to array.
+
+As function can be called with any number of arguments to solve this we can use rest operator
+
+Ques: const points=[
+[4,5],[1,10],[0,40]
+]
+convert into [{x:4,y:5},{x:1,y:10},{x:0,y:40}]
+
+points.map(([x,y])=>{
+return {x:x,y:y}
+})
+
+
+eg : function add(...args)
+{
+
+for of loop
+sum+=sum+arg
+}
+
+add(1,2,3,4,5)
+
+Ques: what does array fill method does?
+Ans: fill method changes all the elements in the array to a statc value.from start index to end index.
+
+let arr=[1,2,3,4,5];
+arr.fill(0) // fill arr with 0;
+
+array.fill(<element to fill with>,<start index>,<upto index>);
+
+
+Ques: what are first class functions in js?
+Ans: js has first class functions as functions are treated as any other variable. and can be passed as reference or argument to any other function.
+
+const a=function()
+{
+console.log("a function invoked");
+}
+a()
+here we have assigned anonymous function to a which is an variable.
+eg:2
+function sayHello()
+{
+return "Hello";
+}
+
+function sayName(hello,name)
+{
+console.log(hello()+name);
+}
+
+sayName(sayHello,'rohit');
+
+
+Ques : why call() and apply() method is used?
+
+with call method we can reuse functions that can be used on other objects.
+
+var person = {
+  firstName:"Rohit",
+  lastName: "Sachdeva",
+  fullName: function () {
+    return this.firstName + " " + this.lastName;
+  }
+}
+person.fullName();    this will return Rohit Sachdeva
+
+if we have second object 
+
+var person2={
+firstName:'kunal',
+lastName:'Sachdeva'
+}
+
+in this we want to use same fullName function so we can either define a function in that object or call fullName function of 
+person object. 
+
+we can do so by call()
+
+person.fullName.call(person2)
+
+we call person fullName function by setting owner as person2 object now in fullName function this will refers to person2
+
+
+Ques: this keyword in js?
+Ans: In the global execution context (outside of any function), this refers to the global object whether in strict mode or not.
+When you call a method of an object, JavaScript sets this to the object that owns the method.
+
+Ques: what is function currying in js ?
+Ans: function currying is transformation of function from func(a,b,c) to f(a)(b)(c). 
+By currying we can transform a function with multiple arguments into nested functions.
+
+eg let multiply=function(a)
+{
+	return (b)=>{
+		return (c)=>{
+			return a*b*c
+					}
+				}
+}
+
+this function is called curried function it is similar to multipy(1,2,3) but can be called as multiply(1)(2)(3)
+
+here it works like : muiltiply(1)(2)(3)-> first 1 is passed to multiply function and it returns a function 
+
+(b)=>{
+return (c)=>{
+return a*b*c;
+}
+}
+
+after that 2 will be passed to b function and c function will be returned -> now c function will be called by 3 and it will return 6 as result.
+
+
+Ques : what is bind method in js ?
+Ans: Unlike call and apply bind method doesnot execute a function it returns a copy of a function bind to that scope.
+bind method attaches this keyword with the scope passed.
+
+obj.bind(context)
+
+
+Ques: recurisively mukltiply arrayelements?
+Ans: mukltiply(arr)
+{
+if(arr.length==0)
+return 1;
+
+else
+arr.shift()*mukltiply(arr);
+}
+
+
+Ques: method to check object is an array?
+Ans Array.isArray(<object>)
+
+
+Ques: parse multidimensional array in js using recurssion ?
+Ans: methods used: 
+Array.isArray()
+
+shift()
+
+Number.isInteger()
+
+let arr=[[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]
+
+printIntegers=(arr)=>{
+let first=arr.shift();
+count=0;
+
+if(Array.isArray(first))
+count+=printIntegers(first);	
+}
+
+Ques: what is Array join method ?
+Ans:Array join method takes an array and returns a string.it creates and returns a new string from array.
+const elements = ['Fire', 'Air', 'Water'];
+
+if we want to create a string from this array elements we can use array join method.
+
+array.join(<seprator >) // specifies which seprator to use to seprate elements of array as string
+
+elements.join() ->> it will return string of elements 
+elements.join() it will return string as "Fire,AIR, WAter"
+
+elements.join(' + ') ->> then elements will look like ->> Fire + Air + Water
+
+we can sepcify the seprator injoin like 
+elements.join(-)  FIRE-AIR-WAter
+
+Ques: how to calculate array depth?
+Ans: 
+
+Ques: Array.of()
+Ans: The Array.of() method creates a new Array instance from a variable number of arguments
+
+Array.of(7)  -> it creates an array with element 7 like [7]
+the duifferenec between Array.of(7) and Array(7) is of creates a new array with element in it while 
+Array(7) -> creates a new empty array with 7 places [, ,  ,  ,  ,  ,  ,];
+
+while Array(1,2,3) creates a new array -> [1,2,3]
+Array.of(1,2,["2,3"])-> creates new array -> [1,2,[2,3]]
+
+Ques: Array slice method ?
+Ans:The slice() method returns a shallow copy of a portion of an array into a new array object selected from start to end 
+
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+animals.slice(2) // this will slice or return elements from animals array starting from position 2 till end;
+
+animals.slice(1,3) // this will return array from 1 till 2 excluding 3.
+
+Ques: how to create classes in js?
+Ans: classes in js as of ES6
+
+class superHero{
+	// if we want to define private fields we can do by prefix it by #
+	#name;  // here name field is private field which will not be accessible by instance
+	power;
+	
+	constructor(name,power)
+	{
+		this.#name=name;
+		this.power=power;
+	}
+	
+	// to access the private fields we have to use setters and getters
+	get heroName()
+	{
+		return this.#name;
+	}
+	
+	set heroName(val)
+	{
+		this.#name=val;
+	}
+	
+	// class can also have static members  -> basically which can be directy called using class
+	static getInfo()
+	{
+		return this.power;
+	}
+}
+
+
+Ques: prototype in js?
+Ans: javascript is a dynamic language we can add properties to object at any time. 
+
+like if we have 
+function student(name,gender)
+{
+	this.name=name;
+	this.gender=gender;
+}
+
+let st1=new student("rohit","male")
+
+here st1 will  have name and gender properties 
+if we do st1.age="25"
+
+then age will be added to st1 object 
+{name:"rohit",gender:"male","age:"25"};
+
+but if we create another instance 
+let st2=new student("aman","22");
+then this st2 instancw will not have age property so if we want to add a property which will be used by other instances we can do it by prototype.
+
+student.prototype.age="25"
+
+now if we create 
+let st3=new student("tusar","23");
+then st3 will look like {name:"tusar",gender:"male"}
+but where is age ? we just added 
+the property is there in st3 but is not reflected
+
+we can check it by st3.age // it will output 25;
+
+Every object which is created using literal syntax or constructor syntax with the new keyword, includes __proto__ property that points to prototype object of a function that created this object.
+
+we can check this by student.prototype  // on function
+on instance we can check by st1._proto_
+
+
+Ques: function add(x=4,y=6){
+return x+y;
+}
+
+this is how we supply default arguments in functions
+
+Ques : difference between rest and spread operator in js?
+Ans: Rest and Spread operator both are denoted by (...) three dots but their functionality is different.
+
+eg. if we have a function add(a,b,c,d,e)
+{
+	return a+b+c+d+e;
+}
+
+let numbers=[1,2,3,4,5]
+if we call this add(numbers)
+then it will not give us desired result
+
+to get desrired reslt we can use: add.apply(null,numbers)  it will return 15.
+
+another way is rest operator
+REST: (...)->The rest parameter syntax allows a function to accept an indefinite number of arguments as an array.
+
+REST parameter can be used for a function to accept any number of values.
+
+add(...val)
+{
+	for(let v of val)
+	{
+		console.log(v);
+	}
+}
+
+add(1,2,34,4,5,6,7)
+
+this argument list will be passed to add function as an araay and will be stored in val object as [1,2,4,5,6,7]
+
+Spread Paramter:(...)-> Spread syntax (...) allows an iterable such as an array expression or string to be expanded in places where zero or more arguments.
+
+eg: a function takes 3 arguments add(x,y,z)
+
+and we have [1,2,3]
+
+then we can use spread syntax : add(...numbers)
+
+Rest syntax looks exactly like spread syntax. In a way, rest syntax is the opposite of spread syntax. Spread syntax "expands" an array into its elements, while rest syntax collects multiple elements and "condenses" them into a single element.
+
+when ... in function parameters then it is rest 
+when used during call it is spread.
+
+Ques: javascript reduce method ?
+Ans:  
+Array reduce method executes a reducer function on each element of the array resulting in single output value.
+
+the reducer function takes four arguments: 
+(Accumulator, currentValue, currentIndex, SourceArray)
+
+your reducer function return a value is assigned to the acculumator whose value is remembered across iteration throughout the array.
+
+
+let arr=[elements]
+arr.reduce((acc,currentValue,index,array)=>{})
+
+let arr=[1,2,3,4,5]
+arr.reduce((acc,currentValue,index,array)=>{
+	return acc+currentValue;
+},0);
+
+flatten array using reduce
+
+
+eg if we have array : [1,[2,3]]
+
+arr.reduce((accumu,curr)=>{
+	
+	return acc.concat(curr)
+	
+},[])
+ 
+ 
+Ques: what are promises?
+Ans: Promises are the javascript function that takes the 2 arguments resolve and reject. 
+
+let prom=new promise((res,rej)=>{
+		
+});
+
+prom.then(callback);
+
+Ques: what is symbol data type?
+Ans: 
+typeof null -> object
+typeof undefined -> undefined
+typeof 'a'-> string
+typeof 2-> number
+typeof {}-> object
+
+symbol are js primitive data type they guarantee to be unique.
+let id1=symbol()
+this creates a new symbol 
+
+
+Ques: Javascript regular expression?
+Ans: regular expression in js can be used for search , validation and other purposes.
+
+syntax for regular expression: /<regular expression goes here>/
+
+we can define regular expression in 2 ways : 
+1. regex variable 
+2. using constructor
+
+1. let regx=/rohit/   
+
+2. let reg=new RegExp("/abc/");
+
+
+to match the regular expression we have following methods.
+
+1. test 
+
+regexp.test(string to match )_>  it returns boolean value if regex matches string ut results true else false.
+
+2. exec
+
+regex.exec(str)_> it returns array containing matches found along with their indexes.
+
+3. match 
+
+this function works on string and matches the regular exprssion
+str.match(regex) _> it returns array containing natches found just araay of found matches not indexes
+
+4. search 
+this method also works on str it returns the index at which regex found. first index
+
+str.search(regex).
+
+5.replace
+
+this function replaces the regular expression in string 
+eg . regex=/abc/
+str="this string has abc after replace it will not have."
+str.replace(regex,'')-> this replace function will replace abc which is regex defined with '' in the string 
+after replaced: this string has after replace it will not have.
+
+
+Ques: regex for phone number?
+Ans: for phone number +91 <ten digit number>
+
+for eg if we have +91 723456789
+
+1> starting it should have +91 ->>> (+91)
+2> firt digit should start with either 789 ->>> [7-9]
+3> third digit and following nine diits can be anything from 0-9 ->>> [0-9]
+and 0-9 should be 9 times 
+
+(+91)[7-9][0-9]{9}
+
+
+flags in regex
+
+/<regex gioes here>/<flag goes here>
+
+like if we define regex to find string <rohit>  in a string 
+
+let str="hey rohit how are you 
+hey rohit
+"
+
+let regex=/rohit/
+
+
+if we match or exec regex.exec(str) // then it will match only the first line rohit to match 2nd line also we have to use flags
+
+/m -> for multiline 
+/g -> global flag 
+/i-> case insensitive flag
+
+let str ="hey winter is coming and be prepared "
+
+let regex=/in/
+
+here we have regex to search <in> in the string 
+then 
+str.match(regex) will give the match at index->5 
+
+but if we use flag /g which is global then it will search in the entire string and will give us the match
+
+word boundary -> if we have string 
+let str="implant this idea: plan to  plant more and more trees"
+
+let regex=/plan/gi
+
+then this wil search plan in the string in between or a word starting with it.
+
+/\bHello\b/
+
+str="Hello Java"
+str1="Hello Javascript"
+
+str will give match Hello because we have word boundary and when we have word boundary it means 
+\b in the starting means word should with Hello 
+and \b at the end means it should have that particular at the end 
+
+when we enclose \b \b means we have set the boundary in the start and end word should start and end with that particaular.
+
+when we have limited option we can specify with distingish by pipe symbol |
+
+capturing groups: if in a string we want to match a specific pattern then we should use capturing groups 
+capturing groups are denoted by : (pattern to match)
+let string to be 
+let str="hey welcome to javascript. Welcome to the web tech".
+let regex=/[to]/g if we define our regex inside square brackets then it means it matches either t or o just single character at a time.
+
+if we want to mtch the entire string.
+
+let regex=/(to)/g     -> then it matches the complete word "to" in the string 
+
+we have back references in capturing groups : 
+
+let caturing group (yo)\1  -> here \1 is a backreferene which means capture yo and seconf letter same as first matching group 
+
+
+lookahead groups 
+
+\w+(?=\.com) means match any character follow by .com
+eg : abc.com -> here it will match abc but not match .com because it is lookahead which means match the string which has characters followed by .com 
+if we remove .com from string then string wont match.
+
+this can be used to match password 
+
+1. password must have uppercase lower case and special character
+
+/(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])(?=.{8.}).*/
+
+lookahead reyires pattern to have that group without that info part of the group.
+
+
+lazy quantifiers
+https://javascript.info/regexp-greedy-and-lazy
+
+lazy quantifier: *?
+they means shortest possible string and stop when match found.
+
+  
+Ques: what is async and await ?
+Ans: 
+
+Ques: infinity value and -infinity in js?
+Ans: Infinity is the value which is highest possoble value in js.
+1<Infinity -> returns true 
+1>Infinity -> returns false
+	
+Ques: what is NaN and when do we get NaN as output?
+Ans:	it represents not a number. we get ths value when no numeric operation involved or performed.
+
+Ques: let x;
+console.log(x);
+typeof x;
+output?
+Ams: in javascript type of varibale is decided after the value assigned before that varibale contains undefined.
+
+for this let x;
+console.log(x) > will return undefined.
+and typeof x is also undefined because no value is assigned so no type.
+
+
+Ques: how to reverse the string?
+Ans: let str="hey rohit welcome"
+
+output = yeh tihor emoclew
+
+str.split("").reverse().join("")
+
+1st Method: 
+
+we can traverse the string 
+
+function stringReverse()
+{
+	let newString='';
+	
+	for(let i=str.length-1;i>=0;i--)
+	{
+		newString+=str[i];
+	}
+}
+
+based on ''+'s'-> result into 's'
+
+2nd Method: 
+
+first we split the string into array 
+
+a>  str.split('')  ->> this will split the str into array of letters
+
+["h", "e", "y", " ", "r", "o", "h", "i", "t", " ", "w", "e", "l", "c", "o", "m", "e"]
+
+b>   now we will reverse the letters 
+
+str.split("").reverse()
+["e", "m", "o", "c", "l", "e", "w", " ", "t", "i", "h", "o", "r", " ", "y", "e", "h"]
+
+c> now we will join the array using ""
+str.split("").reverse().join("")
+
+"emoclew tihor yeh"
+
+d> now we have letters reverses as a string 
+now we want to reverse this string 
+
+str.split(" ").reverse().join()
+
+Ques: how to empty an arrat ?
+Ans: let arr=[1,2,3]
+
+arr=[];
+
+or we can do this way :
+
+arr.length=0;
+
+
+Ques:let a=b=0 how does browser interpret it?
+Ans: here a=b=0 is interpreted as
+let a;
+window.b=0; // because b is accidentaly defined as global variable 
+
+a=window.b;
+
+
+https://dmitripavlutin.com/simple-but-tricky-javascript-interview-questions/
+
+
+Ques: difference between null and undefined?
+Ans: null is a value that can be assigned to a variable and means no value .it means no value
+where Undefined: undefined ; thhe variables that are defined but not assigned any value are undefined.
+
+
+link for difference between == and ===
+https://dorey.github.io/JavaScript-Equality-Table/
+
+
+Ques: what does semicolon after for loop does?
+Ans: semicolon after for loop is considered as null statement or body of for loop.
+
+for(let i=0;i<5;i++);
+{
+	console.log("hello");
+}
+
+expected output should be 5 times hello printed to screen .
+but no 
+it will print hello just one time 
+because we have smicolon at the end of the for loop which is considered as the body of the for loop so it will iterate 5 times and do nothing as semicolon means do nothing or null statement and after iterating 5 times it moves to new block 
+{
+	console.log("hello");
+}
+
+and prints hello to console.
+
+Ques: what is function currying in js?
+Ans: Currying is a way to execute function with multiple arguments into sequence of functions.
+for add we can apply currying as:
+
+const add=(a)=>{
+	return (b)=>a+b;
+}
+
+when we call add(5)(6)-> it returns 11
+
+in simple language function currying can be said as : f(a,b,c)=> f(a)(b)(c)
+
+
+Ques: how can we add elements in between the array?
+Ans: let arr=[1,2,3,4,5];
+
+if we wan to add elements after 2 the we can use
+arr.splice(1,0,"hey added");
+
+
+Ques: splice method in js?
+Ans: The splice method changes the content of the array by removing, adding or replacing contents of the array .
+
+we can use splice method to insert at specified position
+
+const months = ['Jan', 'March', 'April', 'June'];
+
+months.splice(1,0,'Feb');
+this will add Feb after 1 position.
+
+
+we can use splice method to replace
+
+months.splice(3,1,'May');
+
+
+splce method returns the removed element
+
+splice(start)
+splice(start,delete count)
+splice(start,delete count,element to add)
+
+
+Qus: how does compare function works?
+Ans:
+
+
+Ques: error handling in javascript?
+Ans: 
+
+
+Ques: String in js?
+Ans: in strings for unicode characters we can represent unicode character by \unary
+for example copyright symbol : ooA9
+
+if we directly print this like 
+let str='00A9'
+ console.log(str)// then it will print 00A9 but we know that it is sybol of copywrigth so we have to use
+ str='\u00A9'
+ console.log(str) -> copyright symbol 
+ 
+ what is unicode ?
+ 
+ unicode as it sounds it is uniquie code for each character. it is same for each character in every language and device
+ 
+  indexOf and lastIndexOf() of strings
+  
+  indexOf() method returns indexOf search for character or string in the given string and returns index
+  
+  let str='hello javascript'
+  str.indexof(o) // it returns 4
+  str.indexOf("hello") returns 0
+  
+  let str1='this is javascript'
+  str1.indexOf("is") returns .2 because we have is in "this" also
+  
+  we can also pass startindex to indexOf and lastIndexOf() methods
+  indexOf(<string to search>,<index from where to start>)
+  
+  lastIndexOf(<string to start>,<start index>)
+  
+  slice method in string?
+  
+  substr(<start index>,<no of characters>)
+  
+  let str="Godzilla"
+  str.substr(1,3) // here 1 means start index 1 and 3 means substr of  3 characters
+  odz
+  
+  if we say str.substr(1,0) // means start index 1 and no of cgaracters 0 which means zero character so it ouputs ""
+    
+
+Ques: difference between call, apply,bind?
+Ans: call -> call is used to pass reference of this . syntax of call method is .call(obj,a,v) -? here obj will be passed as objcet reference and a and b will be passed as function paramters.
+
+apply- it is same as call but accepts function parameters as array.
+apply(<ref of this>,[a,b,c])
+
+bind(<reference>) // it returns the function with binded reference
+
+let returnedfn=fn1.bind(obj)
+returnedfn(a,b) // if it has parameters
+
+
+Ques: in classes do we need to call parant constructor explicitly?
+Ans: yes 
+class Parent
+{
+	constructor()
+	{
+		console.log("parent constructor");
+	}
+	
+	pmethod()
+	{
+		console.log("method in parent class");
+	}
+}
+class Child extends Parent{
+	constructor()
+	{
+		console.log("child constrictir")// of we do this way without calling parent construtor so when we will instaniate the obj of child clas iy will throw error try at console for error.
+	}
+}
+
+
+to overcome this error
+
+class Child extends Parent{
+	constructor()
+	{
+		super() / super refers to parent class and super() mean parent class constructor
+	console.log("child class cons");}
+}
+
+
+
+
+Ques: how to export module?
+Ans: if we have function sum(a,b)
+{
+	return a+b;
+}
+
+and we want to export this function so that other modules can use it we can do it by 2 ways
+export function add(a,b)
+{
+	return a+b;
+}
+
+and in the module which you want to use 
+
+import {add} from '<file name>'
+
+2nd way to export 
+
+at last when all functions.classes are written 
+
+export {add}
+
+import * as <obj> from <file name> 
+
+
+this method is named export
+
+defaut export :
+if you have single file and just single function you want to export or single xport to file
+
+then we can use default export 
+
+we have sum.js inside which we have function sum
+
+function sum()
+{
+	return a+b;
+}
+
+export default sum;
+export {sum as default};
+
+or 
+
+export default function sum()
+{
+}
+
+
+while importing
+
+import sum from 'fle name'  // no need for curly braces
+we can rename also 
+import total from 'sum.js'   // we are importing sum function but will be refering with total 
+total(4,4) returns 8
+
+Ques: how to stop clearTimeout and clearInterval
+Ans: let tobj=clearInterval(()=>{},1000)
+
+clearInterval(tobj)
+
+similarly clearTimeout(tob)
+
+
+ques: Map in js?
+Ans: Map in js syntax: The map Object holds the key value pairs and remebers the original insertion order of the the keys .
+
+let product =new Map();
+product.set('pcode',101).set('pname','apple');
+
+it is iterable
+we can use for of method on map object 
+
+to get all keys in a map
+product.keys();
+
+to get all values 
+product.values()
+
+for(let v of product)
+	
+ir returns ["pcode",101] ["pname","apple"]
+
+delete : used to delete specific key in map.
+
+size method size of map : product.size
+
+-> now we know map object that it stores key, value pairs but what and when to use ?
+
+a map object can store key value where key and value can be anything. 
+
+
+Ques: Set in js ?
+Ans: let names=new Set()
+
+to ad values 
+names.add("rohit")
+names.add("tushar")
+
+
+The default event propogation path is bottom to top which is known as event bubbling.to stop evnt bubbling we can use 
+event.stopPropogation()
+
+event capturing and event bubbling are 2 concepts in js
+
+so coming to first what is event captiring 
+
+<div onClick="func1()">
+<button onClick="func2()">clickme</button>
+</div>
+
+func1()
+{
+	console.log("div clicked")
+}
+func2()
+{
+	console.log("button clicked")
+}
+
+so when user clicks on button then what happened :
+
+output-> button clicked 
+div clicked
+
+we got div clicked also ??? why 
+because of event bubbling as bubble has a tendency to move upward so as event bubbling . in js when an event is fired by default it is in bubble state which means event will move to its ancestors. thats why when we clicked button then event button clicked fired and then it bubbled upto div which prints div clicked.
+
+if we had any other div or element above div and also handler then it would exevute that.
+
+so in short bubbling means event firing up to its ancestors
+
+
+so what is event capturing :
+event capturing is oppostite of event bubbling -> it moves top to bottom 
+
+like if we div.addEventListener('click',fun1,true) // here true means event capture
+button.addEventListener('click',func2,true) 
+
+so when button is clicked event capture occurs which means div captures the event 
+
+which prints: div clicked then button clicked
+
+
+to stop this we can use 
+to stop event bubbling : event.stopPropogation()
+and to stop capturing we can set flag false .
+
+Ques: what is event property in js?
+Ans: event interface represents event that take place in the dom.
+
+event can take place by any means like mouse event by mouse click and keyboard events.
+
+
+event.target -> it is a reference from which event was triggered.
+event.timeStamp -> time at which event occured.
+event.type-> type of event like click or scroll or any typoe 
+event.preventDefault()->  it restricts or stops the default operation of element.
+event.cancelable -> returns boolean whether event is cancelable or not.
+
+when we click a button then we can how can we see the event target->
+by event.target property.
+
+eg: you can set the color of the the elemnt which caused the event like
+event.target.style.color="red";
+
+event.code ->  returns the key pressed eg like if we press a from keyboard then we get KeyA
+
+oninput event->  this.value passed to oninput(this.value) give us the value of the input box.
+oncut, oncopy, onpaste
+
+onchange event in dropdown -> if you have dropdown 
+
+    <select id="degree" onchange="show(this.options[this.selectedIndex].text)">
+        <option value="1">list 1</option>
+        <option value="2">list 2</option>
+        <option value="3">list 3</option>
+        <option value="4">list 4</option>
+        <option value="5">list 5</option>        
+    </select>
+
+we have onchange event here 
+
+this.options gve us the options available and this.selectedIndex is the index of the option selected starting from 0 to options.length-1
+
+this.options[this.selectedIndex].text give us the options text 
+
+Ques: what is async and await in js?
+Ans: 
+async function added to the function to return a promise then return a value.
+await only works inside the async functions .The await keyword causes the JavaScript runtime to pause your code on this line, not allowing further code to execute in the meantime until the async function call has returned its result — very useful if subsequent code relies on that result!
+
+
+async keyword: 
+async before a function means that function always return a promise.
+
+let example : async function f1()
+{
+	return 1;
+}
+this function will return a promise and a resolved promise.
+
+let function a()
+{
+	return new Promise.resolve('test');
+}
+
+a().then(alert)
+
+
+the above function can be wriiten using async as
+async function a()
+{
+	return 'test';
+}
+a().then(alert)
+
+
+lets recall promises in javascript first 
+promise is something that it will execute after a period of time.
+
+in js we can create promises by : let prom=new Promise(); // the promise function takes a callback function 
+
+prom=new Promise(function(resolve,reject){})
+
+in es6 we can do ut by arrow function 
+
+prom=new Promise((res,rej)=>{
+	if(condition)
+		res or resolve();
+	
+	else 
+		reject()
+		
+})
+
+now what is resolve or reject ;
+resolve is a function that will be executed when condition is true 
+and on promise not fulfilment reject is executed
+
+
+if condition is fulfilled then resolve is called and eg if we want a function to execute when promise flfiment orccur then we have to do 
+
+prom.then(callback function )
+or 
+prom.then((data)=>{})
+
+with async and await 
+
+async function greeting()
+{
+	let result =await prom // it means it is waiting for promise to complete once complete it will be saved to result without interrupting code execution
+}
+
+Ques: what is fetch api?
+Ans: fetch api works on promises where XMLHttpRequest works on the callback. XMLHttpRequest returns the response where fetch api returns the response object with body headers and more info.
+
+fetch('url',{})
+eg: fetch('url',{
+	method:'POST / GET / PUT ',
+	headers:{
+		'Content-Type':'application/json;charset=utf-8'
+	}
+	
+})
+
+
+Ques: wht is generators and iterators?
+Ans: 
+
+generators are special kind of functions which are capable of pausing the execution of functon.
+
+function* gen() or function *gen
+{			
+}
+
+if we want a function while genrates value a normal function could be 
+
+function gen()
+{
+	let i=0
+	while(true)
+	{
+		return i++;
+	}
+}
+when gen() is called it could throw error or could run endlessly as we have a infinite loop.
+
+
+so what we need is to give us the value when we need it.
+
+if you want to have a counter function then you can either create a normal function or we can create a generator 
+
+eg of counter function with generator
+
+function* gen()
+{
+	let i=0;
+	
+	while(i<Infinity)
+		yield i++;
+}
+
+
+in simpler terms generators help us to pause and resume code.a generator is a function that can stop midway and then continue from where it stopped.
+
+
+nested generator funtion 
+
+function* gen1()
+{
+yield "hello"}
+
+function* gen2()
+{
+	yield* gen1()
+}
+
+let ob=gen2()
+ob.next()
+
+
+
+Ques: cookies in js?
+Ans: cookies are useful way to store information.
+cookies are used to manage session.
+
+in js you can create cookies trough 
+document.cookie="<cookie key value>"
+max-age -> max age property is added to cookie to extend its lifetime
+
+path:bydefault cookie is available to all pages but if we want we can set the path
+
+path =/    // it means cookie is accessible everywhere 
+path=/home   //it means cookie will be available to all the routes with home
+
+domain: by default cookie is avaulable to http and https
+
+eg : document.cookie="name=rohit;path=/;domain=user.domain.com;secure;max-age="+<time in seconds or days in GMT or UTc String>;
+
+
+Ques: what is prompt in js and how would you test that entered character is vowel?
+Ans: 
+prompt in javascript is a way to get input from user it prompts dialog box to user
+syntax for prompt is : prompt("enter text to show above dialog box","default text to be prsent in dialog box")
+
+let val=prompt("enter you name");
+when ok is clicked prompt returns the value entered in dialog else it returns null on cancel.
+
+to check user input character is vowel or consonant
+we can do : regex=/[a|e|i|o|u]/gi
+.test(val||'')
+
+Ques: print prime numbers between a range?
+Ques: intersection of 2 arrays?
+Ques: inique elements in an array?
+Ques: reverse of number?
+
+														notes:
+document.documentElement  returns us the dom html 
+document.body
+document.head
+document.body.childNodes -> it give us the child nodes of body if we get text some thing in the array of child nodes it shows space
+firstElementChild -> it returns proper first child element
+
+
+
