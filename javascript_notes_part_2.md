@@ -1,7 +1,5 @@
 
 
-## FAQ
-
 ## what is return value of function ?
 Return values are just what they sound like — the values that a function returns when it completes.Some functions don't return a significant value, but others do.
 
